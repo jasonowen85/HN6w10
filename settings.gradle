@@ -1,0 +1,6 @@
+
+//include ':sourcemngproxy'
+//project(':sourcemngproxy').projectDir = new File('proxy/sourcemngproxy')
+
+include ':sourcemngservice', ':sourcemngproxy'
+project(':sourcemngservice').projectDir = new File('service/sourcemngservice')

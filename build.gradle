@@ -1,0 +1,57 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: "conf.gradle"
+buildscript {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }  // <= here
+        maven { url 'https://maven.aliyun.com/repository/google' }  // <= here
+//        maven{
+//            url 'E://sdk/extras/android/m2repository'
+//        }
+        mavenCentral()
+        jcenter()
+        google()
+
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.2'
+    }
+}
+allprojects {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }  // <= here
+        maven { url 'https://maven.aliyun.com/repository/google' }  // <= here
+//        maven{
+//            url 'E://sdk/extras/android/m2repository'
+//        }
+        mavenCentral()
+        jcenter()
+        google()
+    }
+
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs.add('-Xbootclasspath/p:E:\\AsWorkSpace\\HN6w10\\service\\sourcemngservice\\jars\\framework.jar')
+        }
+    }
+
+
+
+    gradle.taskGraph.whenReady {
+        tasks.each { task ->
+            if (task.name == 'mockableAndroidJar') {
+                task.enabled = false
+            }
+        }
+    }
+}
+
+ext {
+    compileSdkVersion = 28
+    buildToolsVersion = "28.0.3"
+    targetSdkVersion = 28
+    versionCode = 501000
+    versionName = "0.5.1"
+}
+dependencies {
+}
